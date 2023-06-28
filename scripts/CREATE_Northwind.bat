@@ -1,1 +1,0 @@
-sqlcmd -S (local) -i %~dp0\CREATE_Northwind.sql

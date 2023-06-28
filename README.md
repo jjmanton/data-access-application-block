@@ -1,9 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/2yn8u67mpbnjfyvt/branch/master?svg=true)](https://ci.appveyor.com/project/EnterpriseLibrary/data-access-application-block/branch/master)
-[![NuGet Pre Release](https://img.shields.io/nuget/vpre/EnterpriseLibrary.Data.NetCore.svg)](https://www.nuget.org/packages/EnterpriseLibrary.Data.NetCore)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/EnterpriseLibrary.Data.NetCore.svg)](https://www.nuget.org/packages/EnterpriseLibrary.Data.NetCore)
-[![License](https://img.shields.io/badge/license-apache%202.0-60C060.svg)](https://github.com/EnterpriseLibrary/data-access-application-block/blob/master/LICENSE)
-
-
 # DATA ACCESS APPLICATION BLOCK (DAAB)
 
 The Data Access Application Block abstracts the actual database you are using, and exposes a collection of methods that
@@ -55,11 +49,3 @@ querying using techniques such as Language Integrated Query (LINQ).
 
 However, the block is not intended to be an Object/Relational Mapping (O/RM) solution. Although it uses mappings to
 relate parameters and relational data with the properties of objects, but does not implement an O/RM modeling solution.
-
-Detailed tutorial and API reference is at https://enterpriselibrary.github.io/daab/
-
-## How to help
-Interested in helping out? That's great. Look at the [issues](https://github.com/EnterpriseLibrary/data-access-application-block/issues)
-and see if there's something you'd like to work on, or [open a new issue](https://github.com/EnterpriseLibrary/data-access-application-block/issues/new/choose)
-if you have a new idea. Once your new issue is approved, head to the [wiki](https://github.com/EnterpriseLibrary/data-access-application-block/wiki)
-to learn about our coding conventions and how to set up your environment, fork and submit a PR.

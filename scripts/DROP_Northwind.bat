@@ -1,1 +1,0 @@
-sqlcmd -S (local)\SQL2016 -i %~dp0\DROP_Northwind.sql

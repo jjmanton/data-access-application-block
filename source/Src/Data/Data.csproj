@@ -1,56 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\..\package.props" />
-
   <PropertyGroup>
-    <TargetFrameworks>net452;net46;net47;netstandard2.0;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
-
-    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
-    <FileVersion>$(Version).$(Revision)</FileVersion>
-
-    <AssemblyName>$(PreAssemblyName).Data</AssemblyName>
-    <RootNamespace>$(PreAssemblyName).Data</RootNamespace>
-    <AssemblyTitle>Enterprise Library Data Access Application Block</AssemblyTitle>
-
-    <PackageId>$(PrePackageName).Data$(PostPackageName)</PackageId>
-    <Title>Data Access Application Block</Title>
-    <Description>The Data Access Application Block simplifies the development of tasks that implement common data access functionality. Applications can use this application block in a variety of situations, such as reading data for display, passing data through application layers, and submitting changed data back to the database system.</Description>
-    <Summary>The Data Access Application Block simplifies the development of tasks that implement common data access functionality.</Summary>
-    <PackageTags>entlib entlib6 Enterprise Library data daab dab LOB futures OSS</PackageTags>
-
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\EnterpriseLibrary.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <EntLibCommon>..\..\..\..\Common\source\Src\Common\Common.csproj</EntLibCommon>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(EntLibCommon)" Condition="Exists('$(EntLibCommon)') AND '$(EntLibDependencyType)' == 'Project'" />
-    <PackageReference Include="$(PrePackageName).Common$(PostPackageName)" Version="$(EntLibCommonVersion)" Condition="!Exists('$(EntLibCommon)') OR '$(EntLibDependencyType)' == 'Package'" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="$(SystemConfigurationConfigurationManagerVersion)" />
-    <!-- required for System.Data.Common shim -->
-    <PackageReference Include="System.Data.Odbc" Version="$(SystemDataOdbcVersion)" />
-    <PackageReference Include="System.Data.SqlClient" Version="$(SystemDataSqlClientVersion)" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\..\GlobalAssemblyInfo.cs">
-      <Link>GlobalAssemblyInfo.cs</Link>
-    </Compile>
-
-    <None Include="..\..\DataAccess.licenseheader">
-      <Link>DataAccess.licenseheader</Link>
-    </None>
 
     <Compile Update="Configuration\DesignResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -89,74 +42,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\NuGet\Readme.txt">
-      <Pack>true</Pack>
-      <Visible>False</Visible>
-      <PackagePath></PackagePath>
-    </Content>
-
-    <Content Include="..\..\NuGet\tools\SharedCommon\install.ps1">
-      <Pack>true</Pack>
-      <Visible>False</Visible>
-      <PackagePath>tools</PackagePath>
-    </Content>
-
-    <Content Include="..\..\NuGet\tools\SharedCommon\Utils.psm1">
-      <Pack>true</Pack>
-      <Visible>False</Visible>
-      <PackagePath>tools</PackagePath>
-    </Content>
+    <Folder Include="Common\" />
   </ItemGroup>
 
-  <!-- .NET Core 2.0 and .NET Standard 2.0 have incomplete System.Data.Common implementations, so they need these helpers -->
-  <ItemGroup Condition="!('$(TargetFramework)' == 'netstandard2.0')">
-    <Compile Remove="System.Data.Common\*.cs" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <ConfigurationOverrideFile>
-    </ConfigurationOverrideFile>
-    <DefineConstants>DEBUG;TRACE;WMINET10</DefineConstants>
-    <DocumentationFile>$(SolutionDir)..\bin\Debug\$(AssemblyName).xml</DocumentationFile>
-    <DebugSymbols>true</DebugSymbols>
-    <FileAlignment>4096</FileAlignment>
-    <NoStdLib>false</NoStdLib>
-    <NoWarn></NoWarn>
-    <Optimize>false</Optimize>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
-    <FxCopRules>-Microsoft.Design#CA2210</FxCopRules>
-    <RunFxCop>false</RunFxCop>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>..\..\EnterpriseLibrary.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <ConfigurationOverrideFile>
-    </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;WMINET10</DefineConstants>
-    <DocumentationFile>$(SolutionDir)..\bin\Release\$(AssemblyName).xml</DocumentationFile>
-    <DebugSymbols>true</DebugSymbols>
-    <FileAlignment>4096</FileAlignment>
-    <NoStdLib>false</NoStdLib>
-    <NoWarn></NoWarn>
-    <Optimize>true</Optimize>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>full</DebugType>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
  </Project>

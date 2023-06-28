@@ -163,15 +163,12 @@ namespace System.Data.Common
             //  <add name="OleDb Data Provider" invariant="System.Data.OleDb" description=".Net Framework Data Provider for OleDb" type="System.Data.OleDb.OleDbFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             //  <add name="OracleClient Data Provider" invariant="Oracle.ManagedDataAccess.Client" description=".Net Framework Data Provider for Oracle" type="Oracle.ManagedDataAccess.Client.OracleClientFactory, Oracle.ManagedDataAccess.Client, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             //  <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
-            Type sysDataType = typeof(System.Data.SqlClient.SqlClientFactory);
+            Type sysDataType = typeof(Microsoft.Data.SqlClient.SqlClientFactory);
             string asmQualName = sysDataType.AssemblyQualifiedName.Replace(DbProviderFactoriesConfigurationHandler.sqlclientPartialAssemblyQualifiedName, DbProviderFactoriesConfigurationHandler.oracleclientPartialAssemblyQualifiedName);
             DbProviderFactoryConfigSection[] dbFactoriesConfigSection = new DbProviderFactoryConfigSection[(int)DbProvidersIndex.DbProvidersIndexCount];
 
             //ToDo: Missing providers in .Net Core
-            dbFactoriesConfigSection[(int)DbProvidersIndex.Odbc] = new DbProviderFactoryConfigSection(typeof(System.Data.Odbc.OdbcFactory), DbProviderFactoriesConfigurationHandler.odbcProviderName, DbProviderFactoriesConfigurationHandler.odbcProviderDescription);
-            //dbFactoriesConfigSection[(int)DbProvidersIndex.OleDb] = new DbProviderFactoryConfigSection(typeof(System.Data.OleDb.OleDbFactory), DbProviderFactoriesConfigurationHandler.oledbProviderName, DbProviderFactoriesConfigurationHandler.oledbProviderDescription);
-            dbFactoriesConfigSection[(int)DbProvidersIndex.OracleClient] = new DbProviderFactoryConfigSection(DbProviderFactoriesConfigurationHandler.oracleclientProviderName, DbProviderFactoriesConfigurationHandler.oracleclientProviderNamespace, DbProviderFactoriesConfigurationHandler.oracleclientProviderDescription, asmQualName);
-            dbFactoriesConfigSection[(int)DbProvidersIndex.SqlClient] = new DbProviderFactoryConfigSection(typeof(System.Data.SqlClient.SqlClientFactory), DbProviderFactoriesConfigurationHandler.sqlclientProviderName, DbProviderFactoriesConfigurationHandler.sqlclientProviderDescription);
+            dbFactoriesConfigSection[(int)DbProvidersIndex.SqlClient] = new DbProviderFactoryConfigSection(typeof(Microsoft.Data.SqlClient.SqlClientFactory), DbProviderFactoriesConfigurationHandler.sqlclientProviderName, DbProviderFactoriesConfigurationHandler.sqlclientProviderDescription);
 
             for (int i = 0; i < dbFactoriesConfigSection.Length; i++)
             {
